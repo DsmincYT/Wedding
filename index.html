@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Данила & Елизавета</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#1c0f18;
+      --bg2:#2c1320;
+      --card:rgba(255,248,240,.10);
+      --card2:rgba(255,248,240,.15);
+      --text:#f7efe6;
+      --muted:#d8c8ba;
+      --gold:#d9b36a;
+      --gold2:#f2d08a;
+      --border:rgba(217,179,106,.30);
+      --shadow:0 20px 60px rgba(0,0,0,.35);
+      --radius:24px;
+      --max:1100px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:'Inter',sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(217,179,106,.14), transparent 35%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      color:var(--text);
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:'';
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:.12;
+      background-image:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,.25) 0 1px, transparent 1px),
+        radial-gradient(circle at 80% 30%, rgba(255,255,255,.18) 0 1px, transparent 1px),
+        radial-gradient(circle at 40% 70%, rgba(255,255,255,.14) 0 1px, transparent 1px);
+      background-size:140px 140px;
+      z-index:-1;
+    }
+
+    .container{
+      width:min(calc(100% - 32px), var(--max));
+      margin:0 auto;
+    }
+
+    .section{
+      padding:72px 0;
+    }
+
+    .glass{
+      background:linear-gradient(180deg, var(--card), rgba(255,248,240,.06));
+      border:1px solid var(--border);
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(16px);
+      -webkit-backdrop-filter:blur(16px);
+    }
+
+    .hero{
+      min-height:100svh;
+      display:flex;
+      align-items:center;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .hero::after{
+      content:'';
+      position:absolute;
+      inset:auto 0 0 0;
+      height:140px;
+      background:linear-gradient(180deg, transparent, rgba(28,15,24,.85));
+      pointer-events:none;
+    }
+
+    .hero-bg{
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(180deg, rgba(18,10,16,.45), rgba(18,10,16,.82)),
+        url('hero-bg.jpg') center/cover no-repeat;
+      transform:scale(1.02);
+      z-index:-1;
+    }
+
+    .hero-inner{
+      width:100%;
+      display:grid;
+      gap:28px;
+      grid-template-columns:1.15fr .85fr;
+      align-items:center;
+      padding:32px 0 56px;
+    }
+
+    .hero-title{
+      font-family:'Great Vibes', cursive;
+      font-size:clamp(2.6rem, 7vw, 5.8rem);
+      line-height:1;
+      margin:0 0 14px;
+      color:#fff7ef;
+      text-shadow:0 8px 30px rgba(0,0,0,.45);
+    }
+
+    .hero-subtitle{
+      font-family:'Playfair Display',serif;
+      font-size:clamp(1.05rem, 2.2vw, 1.5rem);
+      color:var(--muted);
+      margin:0 0 24px;
+      max-width:640px;
+    }
+
+    .hero-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 16px;
+      border-radius:999px;
+      background:rgba(217,179,106,.12);
+      border:1px solid rgba(217,179,106,.35);
+      color:var(--gold2);
+      margin-bottom:18px;
+      font-weight:600;
+      letter-spacing:.02em;
+    }
+
+    .hero-card{
+      border-radius:30px;
+      overflow:hidden;
+      position:relative;
+      min-height:560px;
+      display:flex;
+      align-items:end;
+      justify-content:center;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.12), rgba(0,0,0,.52)),
+        url('couple.jpg') center/cover no-repeat;
+      box-shadow:0 24px 70px rgba(0,0,0,.45);
+    }
+
+    .hero-card-content{
+      width:100%;
+      padding:28px;
+      text-align:center;
+      background:linear-gradient(180deg, transparent, rgba(16,9,13,.78));
+    }
+
+    .names{
+      font-family:'Playfair Display',serif;
+      font-size:clamp(1.4rem, 3vw, 2.2rem);
+      font-weight:600;
+      margin:0 0 12px;
+    }
+
+    .countdown{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:10px;
+      margin-top:18px;
+    }
+
+    .time-box{
+      padding:14px 10px;
+      border-radius:18px;
+      background:rgba(255,248,240,.10);
+      border:1px solid rgba(255,255,255,.12);
+      text-align:center;
+    }
+
+    .time-box span{
+      display:block;
+    }
+
+    .time-val{
+      font-size:clamp(1.35rem, 3vw, 2rem);
+      font-weight:700;
+      color:#fff;
+    }
+
+    .time-label{
+      font-size:.8rem;
+      color:var(--muted);
+      margin-top:4px;
+    }
+
+    .btn-row{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:28px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:14px 20px;
+      border-radius:999px;
+      text-decoration:none;
+      font-weight:600;
+      transition:.25s ease;
+      border:1px solid transparent;
+      cursor:pointer;
+      font:inherit;
+    }
+
+    .btn-primary{
+      background:linear-gradient(135deg, var(--gold), #b98a3f);
+      color:#24120f;
+    }
+
+    .btn-secondary{
+      background:rgba(255,248,240,.08);
+      border-color:rgba(255,255,255,.16);
+      color:var(--text);
+    }
+
+    .btn:hover{
+      transform:translateY(-2px);
+    }
+
+    .grid-2{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:24px;
+    }
+
+    .card{
+      border-radius:var(--radius);
+      padding:28px;
+    }
+
+    .section-title{
+      font-family:'Playfair Display',serif;
+      font-size:clamp(1.6rem, 3vw, 2.5rem);
+      margin:0 0 14px;
+      color:#fff;
+    }
+
+    .section-kicker{
+      color:var(--gold2);
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      font-size:.78rem;
+      margin:0 0 10px;
+    }
+
+    .lead{
+      font-size:1.05rem;
+      line-height:1.8;
+      color:var(--muted);
+      margin:0;
+    }
+
+    .info-list{
+      list-style:none;
+      padding:0;
+      margin:18px 0 0;
+      display:grid;
+      gap:12px;
+    }
+
+    .info-list li{
+      padding:14px 16px;
+      border-radius:16px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+      color:var(--muted);
+    }
+
+    .highlight{
+      color:var(--gold2);
+      font-weight:600;
+    }
+
+    .schedule{
+      display:grid;
+      gap:14px;
+    }
+
+    .schedule-item{
+      display:flex;
+      align-items:flex-start;
+      gap:14px;
+      padding:16px 18px;
+      border-radius:16px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+    }
+
+    .schedule-time{
+      min-width:92px;
+      color:var(--gold2);
+      font-weight:700;
+    }
+
+    .map-wrap{
+      overflow:hidden;
+      border-radius:22px;
+      min-height:340px;
+      background:rgba(255,255,255,.05);
+    }
+
+    .map-wrap iframe{
+      width:100%;
+      height:340px;
+      border:0;
+      display:block;
+    }
+
+    .palette{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:18px;
+    }
+
+    .swatch{
+      width:54px;
+      height:54px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.15);
+      box-shadow:0 10px 24px rgba(0,0,0,.18);
+    }
+
+    .gallery{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+    }
+
+    .gallery img{
+      width:100%;
+      aspect-ratio:1/1.2;
+      object-fit:cover;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.12);
+    }
+
+    .contacts{
+      display:grid;
+      gap:12px;
+    }
+
+    .contact-item{
+      padding:16px 18px;
+      border-radius:16px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+    }
+
+    .contact-item a{
+      color:#fff;
+      text-decoration:none;
+    }
+
+    .rsvp-form{
+      display:grid;
+      gap:12px;
+    }
+
+    .field{
+      width:100%;
+      padding:15px 16px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(20,10,16,.55);
+      color:var(--text);
+      outline:none;
+      font:inherit;
+    }
+
+    .field::placeholder{
+      color:#bfaea2;
+    }
+
+    .footer{
+      padding:30px 0 48px;
+      color:rgba(255,255,255,.66);
+      text-align:center;
+      font-size:.92rem;
+    }
+
+    .reveal{
+      opacity:0;
+      transform:translateY(24px);
+      transition:opacity .7s ease, transform .7s ease;
+    }
+
+    .reveal.show{
+      opacity:1;
+      transform:none;
+    }
+
+    @media (max-width: 900px){
+      .hero-inner,
+      .grid-2{
+        grid-template-columns:1fr;
+      }
+      .hero-card{
+        min-height:460px;
+      }
+      .gallery{
+        grid-template-columns:1fr 1fr;
+      }
+    }
+
+    @media (max-width: 640px){
+      .section{padding:56px 0}
+      .card{padding:22px}
+      .countdown{grid-template-columns:repeat(2,1fr)}
+      .gallery{grid-template-columns:1fr}
+      .btn-row{flex-direction:column}
+      .btn{width:100%}
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="container hero-inner">
+        <div class="reveal">
+          <div class="hero-badge">Wedding Invitation</div>
+          <h1 class="hero-title">Данила + Елизавета = ❤️</h1>
+          <p class="hero-subtitle">Мы будем счастливы разделить с вами этот день, наполненный любовью, теплом и красивыми моментами.</p>
+          <div class="btn-row">
+            <a href="#invite" class="btn btn-primary">Открыть приглашение</a>
+            <a href="#rsvp" class="btn btn-secondary">Подтвердить участие</a>
+          </div>
+        </div>
+
+        <div class="hero-card reveal">
+          <div class="hero-card-content">
+            <div class="names">Данила & Елизавета</div>
+            <div>Дата свадьбы: <span class="highlight">04 сентября 2026</span></div>
+            <div class="countdown" id="countdown">
+              <div class="time-box"><span class="time-val" id="days">00</span><span class="time-label">дней</span></div>
+              <div class="time-box"><span class="time-val" id="hours">00</span><span class="time-label">часов</span></div>
+              <div class="time-box"><span class="time-val" id="minutes">00</span><span class="time-label">минут</span></div>
+              <div class="time-box"><span class="time-val" id="seconds">00</span><span class="time-label">секунд</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="invite">
+      <div class="container grid-2">
+        <div class="card glass reveal">
+          <p class="section-kicker">Приглашение</p>
+          <h2 class="section-title">Дорогой гость!</h2>
+          <p class="lead">Мы рады пригласить Вас на самый важный день нашей жизни. Будем очень счастливы видеть вас среди гостей и разделить с вами этот прекрасный вечер.</p>
+        </div>
+        <div class="card glass reveal" style="background:url('invite-photo.jpg') center/cover no-repeat; min-height:320px;"></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container grid-2">
+        <div class="card glass reveal">
+          <p class="section-kicker">Пожелания</p>
+          <h2 class="section-title">Подарки и настроение</h2>
+          <ul class="info-list">
+            <li>Цветы не обязательны.</li>
+            <li>Можно бутылку вина.</li>
+            <li>Денежный подарок приветствуется.</li>
+            <li>«Горько!» кричать обязательно 😄</li>
+          </ul>
+        </div>
+
+        <div class="card glass reveal">
+          <p class="section-kicker">Программа дня</p>
+          <h2 class="section-title">Расписание</h2>
+          <div class="schedule">
+            <div class="schedule-item"><div class="schedule-time">14:30</div><div>Регистрация</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container grid-2">
+        <div class="card glass reveal">
+          <p class="section-kicker">Карта</p>
+          <h2 class="section-title">Как добраться</h2>
+          <p class="lead">Нажмите кнопку ниже, чтобы открыть маршрут в удобном навигаторе.</p>
+          <p class="lead">Адрес: ул. Растопчина, 51, Владимир, Владимирская обл., 600027</p>
+          <div class="btn-row">
+  <a class="btn btn-primary"
+     href="https://yandex.ru/maps/?rtext=~56.173000%2C40.465000"
+     target="_blank"
+     rel="noopener">
+    Открыть маршрут
+  </a>
+</div>
+        </div>
+        <div class="map-wrap glass reveal">
+  <iframe
+    src="https://yandex.ru/map-widget/v1/?ll=40.465000%2C56.173000&z=17&pt=40.465000,56.173000,pm2rdm"
+    width="100%"
+    height="340"
+    frameborder="0">
+  </iframe>
+</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container grid-2">
+        <div class="card glass reveal">
+          <p class="section-kicker">Дресс-код</p>
+          <h2 class="section-title">Цветовая палитра</h2>
+          <p class="lead">Просим поддержать настроение праздника в мягких и благородных оттенках.</p>
+          <div class="palette">
+            <div class="swatch" style="background:#4a2c12"></div>
+            <div class="swatch" style="background:#6b492c"></div>
+            <div class="swatch" style="background:#a37f5f"></div>
+            <div class="swatch" style="background:#a37248"></div>
+            <div class="swatch" style="background:#70563f"></div>
+          </div>
+        </div>
+
+        <div class="card glass reveal">
+          <h2 class="section-title">Подтвердить участие</h2>
+
+          <form class="rsvp-form" id="rsvp" action="https://formspree.io/f/mpqgjbrr" method="POST">
+            <input class="field" type="text" name="name" placeholder="Ваше имя" required>
+            <input class="field" type="email" name="email" placeholder="Ваш email" required>
+            <input class="field" type="tel" name="phone" placeholder="Телефон или Telegram">
+            <select class="field" name="attendance" required>
+              <option value="" disabled selected>Я приду?</option>
+              <option value="Да">Да</option>
+              <option value="Нет">Нет</option>
+            </select>
+            <textarea class="field" name="message" rows="4" placeholder="Комментарий"></textarea>
+            <button class="btn btn-primary" type="submit">Отправить ответ</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="card glass reveal">
+          <p class="section-kicker">Галерея</p>
+          <h2 class="section-title">Наши фотографии</h2>
+          <div class="gallery">
+            <img src="gallery-1.jpg" alt="Фото 1">
+            <img src="gallery-2.jpg" alt="Фото 2">
+            <img src="gallery-3.jpg" alt="Фото 3">
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="footer">© Данила & Елизавета</div>
+  </main>
+
+  <script>
+    const targetDate = new Date('2026-09-04T00:00:00').getTime();
+
+    function updateCountdown() {
+      const now = Date.now();
+      const diff = Math.max(targetDate - now, 0);
+      const days = Math.floor(diff / 86400000);
+      const hours = Math.floor((diff % 86400000) / 3600000);
+      const minutes = Math.floor((diff % 3600000) / 60000);
+      const seconds = Math.floor((diff % 60000) / 1000);
+
+      document.getElementById('days').textContent = String(days).padStart(2, '0');
+      document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+      document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+      document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('show');
+      });
+    }, { threshold: 0.14 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
